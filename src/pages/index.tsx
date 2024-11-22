@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 
-const startingDominoes = [
+const startingDominoes : number[][] = [
   [6, 1],
   [4, 3],
   [5, 1],
@@ -14,7 +14,7 @@ const startingDominoes = [
 ];
 
 export default function Home() {
-  const [dominoes, setDominoes] = useState([...startingDominoes]);
+  const [dominoes, setDominoes] = useState<number[][]>([...startingDominoes]);
 
   // 1.) Count Double Numbers -- Looping through and find the double numbers domnioes
   function doubleNumbers() {
@@ -31,10 +31,10 @@ export default function Home() {
   }
 
   // 2.) Sort Dominoes -- Sort the dominoes ascending & descending using .sort
-  function sortDominoes(order) {
+  function sortDominoes(order : string) {
     const sorted = [...dominoes];
 
-    sorted.sort((a, b) => {
+    sorted.sort((a : number[], b : number[]) => {
       const totalA = a[0] + a[1];
       const totalB = b[0] + b[1];
 
@@ -43,15 +43,16 @@ export default function Home() {
       } else if (order === "desc") {
         return totalB - totalA;
       }
+      return 0;
     });
     setDominoes(sorted);
   }
 
   // 3.) Remove Duplicates -- Remove domino with same total number + number combination (including duplicates)
   function removeDuplicates() {
-    const result = [];
-    const checkDominoes = [];
-    const dupeDominoes = [];
+    const result : number[][] = [];
+    const checkDominoes : number[][] = [];
+    const dupeDominoes : number [][] = [];
 
     for (let i = 0; i < dominoes.length; i++) {
       const [a, b] = dominoes[i];
@@ -108,7 +109,7 @@ export default function Home() {
   // 5.) Remove Total -- Filter dominoes with the inputed total number (show dominoes selain total input)
   const [removeTotal, setRemoveTotal] = useState("");
 
-  function removeTotalDominoes(total) {
+  function removeTotalDominoes(total : number) {
     const filtered = [];
     for (let i = 0; i < dominoes.length; i++) {
       const [a, b] = dominoes[i];
